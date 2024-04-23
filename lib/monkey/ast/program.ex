@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.Program do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:statements]
   defstruct [:statements]

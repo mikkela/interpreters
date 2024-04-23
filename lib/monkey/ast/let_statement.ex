@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.LetStatement do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:token, :name, :value]
   defstruct [

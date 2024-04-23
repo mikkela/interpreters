@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.IfExpression do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:token, :condition, :consequence]
   defstruct [

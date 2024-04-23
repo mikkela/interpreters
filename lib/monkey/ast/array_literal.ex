@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.ArrayLiteral do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:token, :elements]
   defstruct [

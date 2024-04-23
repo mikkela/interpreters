@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.Identifier do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:token, :value]
   defstruct [:token, :value]

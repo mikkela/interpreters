@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.ReturnStatement do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:token, :return_value]
   defstruct [:token, :return_value]

@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.BlockStatement do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:token, :statements]
   defstruct [:token, :statements]

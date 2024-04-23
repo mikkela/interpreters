@@ -12,7 +12,7 @@ defmodule Monkey.ParserTest do
   alias Monkey.Ast.InfixExpression
   alias Monkey.Ast.IntegerLiteral
   alias Monkey.Ast.LetStatement
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
   alias Monkey.Ast.PrefixExpression
   alias Monkey.Ast.Program
   alias Monkey.Ast.ReturnStatement

@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.HashLiteral do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:token, :pairs]
   defstruct [

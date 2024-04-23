@@ -1,5 +1,5 @@
 defmodule Monkey.Ast.IntegerLiteral do
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
 
   @enforce_keys [:token, :value]
   defstruct [:token, :value]
