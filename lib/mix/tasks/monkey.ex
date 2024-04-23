@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Repl do
+defmodule Mix.Tasks.Monkey do
   use Mix.Task
   alias Monkey.Repl
 

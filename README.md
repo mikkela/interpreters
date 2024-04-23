@@ -39,7 +39,7 @@ This project only uses the stdlib of Elixir, so no `mix deps.get` is necessary.
 There is a handy mix task to start a Monkey REPL so you can play around with the language.
 
 ```
-mix repl
+mix monkey
 ```
 
 ### Running the tests
