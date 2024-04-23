@@ -1,5 +1,5 @@
 defmodule Common do
   @moduledoc """
-      Common definitions shared among the interpreters
+  Common definitions shared among the interpreters
   """
 end

@@ -1,5 +1,5 @@
 defmodule Basic do
   @moduledoc """
-      Elixir implementation of the Basic programming language.
+  Elixir implementation of the Basic programming language.
   """
 end
