@@ -28,7 +28,6 @@ defmodule Basic.Token do
     lt: "<",
     gt: ">",
     # delimiters
-    semicolon: ",",
     lparen: "(",
     rparen: ")",
     # keywords

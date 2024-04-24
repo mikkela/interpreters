@@ -13,33 +13,25 @@ defmodule Basic.Lexer do
   defp tokenize(chars = [ch | rest], tokens) do
     cond do
       is_whitespace(ch) -> tokenize(rest, tokens)
-      is_scope_delimiter(ch) -> read_scope_delimiter(chars, tokens)
-      is_start_of_number(chars) -> read_number(chars, tokens)
-      is_operator(ch) -> read_operator(chars, tokens)
-      is_letter(ch) -> read_identifier(chars, tokens)
-      true -> Token.new(type: :illegal, literal: "")
+      is_comment(ch) -> skip_comment(rest, tokens)
+      is_parenthesis(ch) -> read_parenthesis(chars, tokens)
+      is_special_character(chars) -> read_special_character(chars, tokens)
+      is_negative_number(chars) -> read_negative_number(chars, tokens)
+      is_digit(ch) -> read_positive_number(chars, tokens)
+      is_identifier(ch) -> read_identifier(chars, tokens)
+      true -> [Token.new(type: :illegal, literal: "") | tokens]
     end
   end
 
-  defp read_scope_delimiter(_chars = [ch | rest], tokens) do
-    token =
-      case ch do
-        "(" -> Token.new(type: :lparen, literal: ch)
-        ")" -> Token.new(type: :rparen, literal: ch)
-        _ -> Token.new(type: :illegal, literal: "")
-      end
-
-    tokenize(rest, [token | tokens])
-  end
   defp read_identifier(chars, tokens) do
-    {identifier, rest} = Enum.split_while(chars, &is_letter/1)
+    {identifier, rest} = Enum.split_while(chars, &is_identifier/1)
     identifier = Enum.join(identifier)
     token = Token.new(type: Token.lookup_ident(identifier), literal: identifier)
 
     tokenize(rest, [token | tokens])
   end
 
-  defp read_number(chars, tokens) do
+  defp read_positive_number(chars, tokens) do
     {number, rest} = Enum.split_while(chars, &is_digit/1)
     number = Enum.join(number)
     token = Token.new(type: :int, literal: number)
@@ -47,7 +39,15 @@ defmodule Basic.Lexer do
     tokenize(rest, [token | tokens])
   end
 
-  defp read_operator(_chars = [ch | rest], tokens) do
+  defp read_negative_number([_sign | chars], tokens) do
+    {number, rest} = Enum.split_while(chars, &is_digit/1)
+    number = Enum.join(number)
+    token = Token.new(type: :int, literal: "-#{number}")
+
+    tokenize(rest, [token | tokens])
+  end
+
+  defp read_special_character(_chars = [ch | rest], tokens) do
     token =
       case ch do
         "=" -> Token.new(type: :eq, literal: ch)
@@ -57,14 +57,29 @@ defmodule Basic.Lexer do
         "/" -> Token.new(type: :slash, literal: ch)
         "<" -> Token.new(type: :lt, literal: ch)
         ">" -> Token.new(type: :gt, literal: ch)
-        _ -> Token.new(type: :illegal, literal: "")
       end
 
     tokenize(rest, [token | tokens])
   end
 
-  defp is_letter(ch) do
-    !(is_scope_delimiter(ch) || ch == ";")
+  defp skip_comment(chars, tokens) do
+    {_comment, rest} = Enum.split_while(chars, &is_newline/1)
+
+    tokenize(rest, tokens)
+  end
+
+  defp read_parenthesis(_chars = [ch | rest], tokens) do
+    token =
+      case ch do
+        "(" -> Token.new(type: :lparen, literal: ch)
+        ")" -> Token.new(type: :rparen, literal: ch)
+      end
+
+    tokenize(rest, [token | tokens])
+  end
+
+  defp is_identifier(ch) do
+    !(is_parenthesis(ch) || is_comment(ch) || is_whitespace(ch))
   end
 
   defp is_digit(ch) do
@@ -72,22 +87,38 @@ defmodule Basic.Lexer do
   end
 
   defp is_whitespace(ch) do
-    ch == " " || ch == "\n" || ch == "\t"
+    ch == " " || ch == "\t" || is_newline(ch)
   end
 
-  defp is_scope_delimiter(ch) do
-    ch == "(" || ch == ")"
+  defp is_newline(ch) do
+    ch == "\n"
   end
 
-  defp is_start_of_number(chars) do
-    is_digit(Enum.at(chars, 0)) || (Enum.at(chars, 0) == '-' && is_digit(Enum.at(chars, 1)))
-  end
-  defp is_operator_character(ch) do
-    (ch == "=" || ch == "+" || ch == "-" || ch == "*" || ch == "/" || ch == "<" || ch == ">")
+  defp is_negative_number(chars) do
+    length(chars) > 1 && Enum.at(chars, 0) == "-" && is_digit(Enum.at(chars, 1))
   end
 
-  defp is_operator(chars) do
-    is_operator_character(Enum.at(chars, 0)) &&
-                                         (is_whitespace(Enum.at(chars, 1)) || is_scope_delimiter(Enum.at(chars, 1)))
+  defp is_comment(ch), do: ch == ";"
+
+  defp is_parenthesis(ch), do: ch == "(" || ch == ")"
+
+  defp is_special_char(ch) do
+    case ch do
+      "=" -> true
+      "+" -> true
+      "-" -> true
+      "*" -> true
+      "/" -> true
+      "<" -> true
+      ">" -> true
+      _ -> false
+    end
+  end
+  defp is_special_character(chars = [ch | rest]) do
+    is_special_char(ch) && (
+      length(rest) == 0 ||
+      is_whitespace(Enum.at(chars, 1)) ||
+      is_comment(Enum.at(chars, 1)) ||
+      is_parenthesis(Enum.at(chars, 1)))
   end
 end
