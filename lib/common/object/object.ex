@@ -1,4 +1,4 @@
-defprotocol Monkey.Object.Object do
+defprotocol Common.Object.Object do
   @doc "Returns the type of the object as a string"
   def type(obj)
 

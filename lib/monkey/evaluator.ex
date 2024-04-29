@@ -21,17 +21,20 @@ defmodule Monkey.Evaluator do
 
   alias Monkey.Evaluator.Builtins
 
+  alias Common.Object.{
+    Error,
+    Hash,
+    Null,
+    Object,
+    Environment
+  }
+
   alias Monkey.Object.{
     Array,
     Boolean,
     Builtin,
-    Environment,
-    Error,
     Function,
-    Hash,
     Integer,
-    Null,
-    Object,
     ReturnValue,
     String
   }

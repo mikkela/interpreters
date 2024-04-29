@@ -1,5 +1,5 @@
-defmodule Monkey.Object.Error do
-  alias Monkey.Object.Object
+defmodule Common.Object.Error do
+  alias Common.Object.Object
 
   @enforce_keys [:message]
   defstruct [:message]

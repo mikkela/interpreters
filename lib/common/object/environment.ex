@@ -1,9 +1,9 @@
-defmodule Monkey.Object.Environment do
+defmodule Common.Object.Environment do
   @enforce_keys [:store]
   defstruct [:store, :outer]
 
   def build do
-    %Monkey.Object.Environment{store: %{}}
+    %Common.Object.Environment{store: %{}}
   end
 
   def build_enclosed(outer) do

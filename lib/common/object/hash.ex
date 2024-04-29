@@ -1,5 +1,5 @@
-defmodule Monkey.Object.Hash do
-  alias Monkey.Object.{Error, Object}
+defmodule Common.Object.Hash do
+  alias Common.Object.{Error, Object}
 
   @enforce_keys [:pairs]
   defstruct [

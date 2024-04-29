@@ -1,5 +1,5 @@
 defmodule Monkey.Object.String do
-  alias Monkey.Object.{Object, Hash}
+  alias Common.Object.{Object, Hash}
 
   @enforce_keys [:value]
   defstruct [:value]

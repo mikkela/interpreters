@@ -1,5 +1,5 @@
 defmodule Monkey.Object.Array do
-  alias Monkey.Object.Object
+  alias Common.Object.Object
 
   @enforce_keys [:elements]
   defstruct [:elements]

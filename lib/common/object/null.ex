@@ -1,5 +1,5 @@
-defmodule Monkey.Object.Null do
-  alias Monkey.Object.Object
+defmodule Common.Object.Null do
+  alias Common.Object.Object
 
   defstruct []
 

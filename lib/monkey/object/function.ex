@@ -1,6 +1,6 @@
 defmodule Monkey.Object.Function do
-  alias Monkey.Object.Object
-  alias Monkey.Ast.Node
+  alias Common.Object.Object
+  alias Common.Ast.Node
 
   @enforce_keys [:parameters, :body, :environment]
   defstruct [

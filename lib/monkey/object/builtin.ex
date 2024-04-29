@@ -1,5 +1,5 @@
 defmodule Monkey.Object.Builtin do
-  alias Monkey.Object.Object
+  alias Common.Object.Object
 
   @enforce_keys [:fn]
   defstruct [:fn]

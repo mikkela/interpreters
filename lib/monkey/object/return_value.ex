@@ -1,5 +1,5 @@
 defmodule Monkey.Object.ReturnValue do
-  alias Monkey.Object.Object
+  alias Common.Object.Object
 
   @enforce_keys [:value]
   defstruct [:value]
