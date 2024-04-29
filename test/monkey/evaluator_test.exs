@@ -1,7 +1,7 @@
 defmodule Monkey.EvaluatorTest do
   use ExUnit.Case
 
-  alias Monkey.Ast.Node
+  alias Common.Ast.Node
   alias Monkey.Evaluator
   alias Monkey.Lexer
   alias Monkey.Object.Array
