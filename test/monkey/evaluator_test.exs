@@ -1,17 +1,18 @@
 defmodule Monkey.EvaluatorTest do
   use ExUnit.Case
 
+  alias Common.Object.Environment
+  alias Common.Object.Null
+  alias Common.Object.Error
+  alias Common.Object.Hash
+
   alias Common.Ast.Node
   alias Monkey.Evaluator
   alias Monkey.Lexer
   alias Monkey.Object.Array
   alias Monkey.Object.Boolean
-  alias Monkey.Object.Environment
-  alias Monkey.Object.Error
   alias Monkey.Object.Function
-  alias Monkey.Object.Hash
   alias Monkey.Object.Integer
-  alias Monkey.Object.Null
   alias Monkey.Object.String
   alias Monkey.Parser
 

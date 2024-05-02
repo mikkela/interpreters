@@ -1,8 +1,8 @@
 defmodule Monkey.Object.HashKeyTest do
   use ExUnit.Case
 
+  alias Common.Object.Hash
   alias Monkey.Object.Boolean
-  alias Monkey.Object.Hash
   alias Monkey.Object.Integer
   alias Monkey.Object.String
 
